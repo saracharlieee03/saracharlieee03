@@ -1,0 +1,53 @@
+/* =========================================================
+   tokens.css · Sistema visual
+   Azul institucional sobre un gris frío. Tema claro y oscuro.
+   ========================================================= */
+:root {
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-ui: 'IBM Plex Sans', 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+
+  --paper: #F1F4F2;
+  --surface: #FFFFFF;
+  --surface-2: #F7F9F8;
+  --ink: #15222B;
+  --muted: #5B6A72;
+  --line: #DCE3E0;
+  --brand: #2563EB;
+  --brand-ink: #1D4ED8;
+  --brand-soft: #DBEAFE;
+  --accent: #60A5FA;
+  --accent-soft: #EFF6FF;
+  --danger: #B3432F;
+  --side: #0B1B3A;
+  --side-ink: #DBEAFE;
+
+  /* Paleta de gráficas: ordenada para que colores vecinos contrasten */
+  --c1: #2563EB; --c2: #3B82F6; --c3: #60A5FA; --c4: #1D4ED8;
+  --c5: #93C5FD; --c6: #1E40AF; --c7: #64748B; --c8: #BFDBFE;
+
+  --r-lg: 18px; --r-md: 12px; --r-sm: 8px;
+  --shadow: 0 1px 2px rgba(21, 34, 43, .05), 0 6px 20px -12px rgba(21, 34, 43, .18);
+  --focus: 0 0 0 3px color-mix(in srgb, var(--accent) 55%, transparent);
+  --side-w: 256px;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --paper: #0C1417;
+  --surface: #131E23;
+  --surface-2: #17242A;
+  --ink: #E4ECE9;
+  --muted: #93A4A9;
+  --line: #23343B;
+  --brand: #60A5FA;
+  --brand-ink: #93C5FD;
+  --brand-soft: #132A52;
+  --accent: #93C5FD;
+  --accent-soft: #172554;
+  --side: #08152D;
+  --side-ink: #DBEAFE;
+  --c1: #60A5FA; --c2: #3B82F6; --c3: #93C5FD; --c4: #2563EB;
+  --c5: #BFDBFE; --c6: #1D4ED8; --c7: #94A3B8; --c8: #DBEAFE;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -14px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
