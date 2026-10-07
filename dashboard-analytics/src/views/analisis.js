@@ -4,7 +4,7 @@
    ========================================================= */
 (() => {
   const U = App.util, Dt = App.data, ui = App.ui, S = App.S;
-  const DIMS = ['Facultad', 'Sede', 'Programa', 'Area', 'Sexo', 'Estrato', 'Modalidad', 'TipoInscripcion', 'TipoPrograma', 'Colegio', 'Comuna', 'Pais'];
+  const DIMS = ['Facultad', 'Sede', 'Programa', 'Area', 'Sexo', 'Estrato', 'Modalidad', 'TipoInscripcion', 'TipoPrograma', 'Colegio', 'Comuna', 'Departamento', 'Pais'];
   const opts = DIMS.map(d => [d, Dt.DIM[d]]);
 
   /* ---------- Tabla dinámica con mapa de calor ---------- */

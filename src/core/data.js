@@ -6,6 +6,7 @@
    ========================================================= */
 (() => {
   const U = App.util, D = window.DATA, R = D.rows, C = {};
+  addDepartamento(D, window.GEO_COL);
   D.cols.forEach((c, i) => (C[c] = i));
   const NA = new Set(['DESCONOCIDO', '** DESCONOCIDO **']);
 
@@ -14,7 +15,8 @@
     Sede: 'Sede', Facultad: 'Facultad', Area: 'Área de conocimiento', Programa: 'Programa',
     Sexo: 'Sexo', Estrato: 'Estrato', Modalidad: 'Modalidad', TipoInscripcion: 'Tipo de inscripción',
     TipoPrograma: 'Nivel', Colegio: 'Tipo de colegio', Institucion: 'Institución de procedencia',
-    Pais: 'País de nacimiento', Ciudad: 'Ciudad de nacimiento', Comuna: 'Comuna', Barrio: 'Barrio'
+    Pais: 'País de nacimiento', Ciudad: 'Ciudad de nacimiento', Comuna: 'Comuna', Barrio: 'Barrio',
+    Departamento: 'Departamento de nacimiento'
   };
 
   const raw = (c, i) => D.dict[C[c]][i];
@@ -61,6 +63,19 @@
       .filter(r => r.n > 0 && !(o.na && NA.has(r.raw)));
     rows.sort(o.byLabel || a === 'Estrato' ? (x, y) => x.raw.localeCompare(y.raw, 'es', { numeric: true }) : (x, y) => y.n - x.n);
     return { cols: colIdx.map(j => ({ i: j, raw: db[j], name: label(b, j) })), rows };
+  }
+
+  /* Columna derivada "Departamento": sale de País + Ciudad de nacimiento con la tabla
+     municipio -> departamento de data/colombia.js. Nacidos fuera del país = EXTERIOR. */
+  function addDepartamento(D, G) {
+    if (!G || D.cols.includes('Departamento')) return;
+    const key = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().replace(/[^A-Z ]/g, ' ').replace(/\s+/g, ' ').trim();
+    const dict = [...G.deptos.map(d => d.raw).sort((a, b) => a.localeCompare(b, 'es')), 'EXTERIOR', 'DESCONOCIDO'];
+    const pos = Object.fromEntries(dict.map((v, i) => [v, i])), byCode = Object.fromEntries(G.deptos.map(d => [d.c, pos[d.raw]]));
+    const kp = D.cols.indexOf('Pais'), kc = D.cols.indexOf('Ciudad'), col = pais => pais === 'COLOMBIA' || pais === 'DESCONOCIDO';
+    const city = D.dict[kc].map(c => byCode[G.muni[key(c)]] ?? pos.DESCONOCIDO);
+    for (const r of D.rows) r.push(col(D.dict[kp][r[kp]]) ? city[r[kc]] : pos.EXTERIOR);
+    D.cols.push('Departamento'); D.labels.push('Departamento de nacimiento'); D.dict.push(dict);
   }
 
   const rowRaw = i => R[i].map((v, k) => D.dict[k][v]);

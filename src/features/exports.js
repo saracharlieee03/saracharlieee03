@@ -30,7 +30,7 @@
   }
 
   /* ---------- Informe Word ---------- */
-  const DIMS = [['Facultad', 8], ['Sede', 10], ['Programa', 10], ['Sexo', 5], ['Estrato', 7], ['Modalidad', 5], ['Colegio', 4], ['TipoInscripcion', 5], ['Institucion', 10], ['Comuna', 10]];
+  const DIMS = [['Facultad', 8], ['Sede', 10], ['Programa', 10], ['Sexo', 5], ['Estrato', 7], ['Modalidad', 5], ['Colegio', 4], ['TipoInscripcion', 5], ['Institucion', 10], ['Comuna', 10], ['Departamento', 10]];
   const dimRows = (c, k) => Dt.count(c, S.idx, c === 'Estrato' ? { byLabel: true } : (c === 'Institucion' || c === 'Comuna') ? { na: true } : {}).slice(0, k).map(x => [x.name, U.fmt(x.n), U.pct(x.n, S.idx.length)]);
 
   function offChart(type, items, h) {

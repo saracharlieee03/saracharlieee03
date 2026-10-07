@@ -7,7 +7,7 @@
   const U = App.util, Dt = App.data, ui = App.ui, S = App.S;
 
   App.nav = [
-    { g: 'Panorama', items: ['resumen', 'tresd'] },
+    { g: 'Panorama', items: ['resumen', 'mapa', 'tresd'] },
     { g: 'Población', items: ['demografia', 'procedencia'] },
     { g: 'Oferta académica', items: ['academico', 'sedes', 'modalidad'] },
     { g: 'Análisis', items: ['cruces', 'comparador', 'preguntas'] },

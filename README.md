@@ -6,7 +6,7 @@ No necesita servidor ni instalación: abre `index.html` en el navegador (con int
 ## Qué trae
 
 - **Panorama**: resumen escrito automáticamente, gráfico "si fueran 100 estudiantes", indicadores y hallazgos automáticos que se pueden aplicar como filtro.
-- **Mapa** (Leaflet): burbujas por comuna de residencia o por sede. Clic en una burbuja para filtrar.
+- **Mapa de Colombia**: mapa por departamento de nacimiento (SVG propio, sin librerías). Clic en un departamento para filtrar todo el tablero; incluye ranking y municipios del departamento elegido.
 - **Ciudad de datos 3D** (Three.js): torres que cruzan dos variables; se gira con el mouse y se filtra con clic.
 - **Asistente IA**: responde preguntas en español sobre los datos filtrados. Funciona sin llaves con un motor local; opcionalmente se conecta a Gemini.
 - **Análisis**: tabla dinámica con mapa de calor, comparador de dos grupos y preguntas de análisis.
@@ -19,6 +19,7 @@ No necesita servidor ni instalación: abre `index.html` en el navegador (con int
 dashboard-analytics/
 ├── index.html              Estructura de la página y orden de carga
 ├── data/datos.js           1. Datos: Excel codificado (diccionarios + filas de enteros)
+├── data/colombia.js        Siluetas de departamentos + tabla municipio → departamento
 ├── src/core/               2. Núcleo (sin gráficas)
 │   ├── util.js                formato, descargas, avisos
 │   ├── data.js                motor de consultas: filtrar, contar, cruzar
@@ -55,5 +56,6 @@ Es un sitio estático: sirve en GitHub Pages o en Render como *Static Site* (sin
 
 ## Notas
 
-- Las coordenadas del mapa son aproximadas (centro de cada comuna o municipio); los lugares sin coordenadas se listan en una tabla aparte.
+- El mapa usa la columna derivada **Departamento**, que se calcula al cargar a partir de País y Ciudad de nacimiento (DIVIPOLA del DANE). Si un municipio existe en varios departamentos se asigna a Antioquia, salvo las excepciones de `tools/generar_colombia.py` (p. ej. Armenia → Quindío). Nacidos fuera del país quedan como `EXTERIOR`.
+- `data/colombia.js` se regenera con `py tools/generar_colombia.py Colombia.geo.json divipola.json` (las URLs de las fuentes están en el script).
 - Registros con valor `DESCONOCIDO` se excluyen de los rankings y se informa cuántos son.
