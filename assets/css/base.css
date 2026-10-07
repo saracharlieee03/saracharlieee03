@@ -1,0 +1,25 @@
+/* base.css — Reset, tipografía y elementos HTML base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font-body); font-size: var(--fs-md); line-height: 1.5;
+  background: var(--bg); color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  transition: background .25s, color .25s;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.15; font-weight: 700; letter-spacing: -.01em; }
+h1 { font-size: var(--fs-xl); }
+h2 { font-size: var(--fs-lg); }
+h3 { font-size: var(--fs-md); }
+p { max-width: 75ch; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-ctrl); }
+a { color: var(--primary); }
+code { font-size: .85em; background: var(--surface-2); padding: 1px 6px; border-radius: 5px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.muted { color: var(--muted); }
+.num { font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,9 @@
+/* print.css — Versión imprimible (Ctrl+P): oculta la navegación y los controles */
+@media print {
+  .side, .actions, .filterbar, .panel-tools, .table-tools, .pager, .menu-btn, .seg, .controls { display: none !important; }
+  .app { display: block; }
+  .main { padding: 0; }
+  body { background: #fff; }
+  .panel, .kpi { box-shadow: none; break-inside: avoid; }
+  .span-4, .span-5, .span-6, .span-7, .span-8 { grid-column: span 12; }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Analítica estudiantil</title>
+<meta name="description" content="Tablero interactivo de análisis de la población estudiantil: filtros, vista 3D y análisis de datos.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232563EB'/><path d='M8 22V14M14 22V9M20 22v-6M26 22V12' stroke='%2360A5FA' stroke-width='3' stroke-linecap='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/views.css">
+</head>
+<body>
+<a class="skip" href="#view">Saltar al contenido</a>
+
+<!-- Menú lateral -->
+<aside class="side" aria-label="Navegación principal">
+  <div class="brand">
+    <span class="logo" aria-hidden="true"><svg viewBox="0 0 32 32" width="34" height="34"><rect width="32" height="32" rx="9" fill="currentColor"/><path d="M8 22V14M14 22V9M20 22v-6M26 22V12" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg></span>
+    <div><b>Analítica estudiantil</b><small>Población matriculada</small></div>
+  </div>
+  <nav id="nav"></nav>
+  <p class="src" id="src"></p>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- Contenido -->
+<div class="main">
+  <header class="top">
+    <button class="icon-btn menu" id="menu" aria-label="Abrir menú"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div class="top-t">
+      <p class="crumb" id="crumb"></p>
+      <h1 id="title"></h1>
+      <p class="desc" id="desc"></p>
+    </div>
+    <div class="top-a">
+      <span class="count" id="count" aria-live="polite"></span>
+      <button class="btn ghost cmdk" id="cmdk" aria-label="Buscar o ejecutar un comando (Ctrl + K)"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg><span>Buscar</span><kbd>Ctrl K</kbd></button>
+      <button class="icon-btn" id="share" title="Copiar enlace de esta vista" aria-label="Copiar enlace de esta vista"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button>
+      <button class="icon-btn" id="theme" aria-label="Cambiar tema"></button>
+      <button class="btn ghost" id="csv">CSV</button>
+      <button class="btn" id="word">Informe Word</button>
+    </div>
+  </header>
+
+  <section class="filters" id="filters" aria-label="Filtros globales"></section>
+  <main id="view" tabindex="-1"></main>
+  <footer class="foot">Datos: registros de estudiantes 2026 · Clic en cualquier gráfica para filtrar · <kbd>Ctrl K</kbd> buscar · <kbd>/</kbd> asistente</footer>
+</div>
+
+<!-- Librerías externas (CDN) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.1.0/docx.min.js" defer></script>
+
+<!-- 1. Datos -->
+<script src="data/datos.js"></script>
+<!-- 2. Núcleo -->
+<script src="src/core/util.js"></script>
+<script src="src/core/data.js"></script>
+<script src="src/core/state.js"></script>
+<!-- 3. Interfaz -->
+<script src="src/ui/components.js"></script>
+<script src="src/ui/charts.js"></script>
+<script src="src/ui/table.js"></script>
+<script src="src/ui/viz.js"></script>
+<!-- 4. Funciones -->
+<script src="src/features/insights.js"></script>
+<script src="src/features/filters.js"></script>
+<script src="src/features/palette.js"></script>
+<script src="src/features/exports.js"></script>
+<script src="src/features/assistant.js"></script>
+<!-- 5. Vistas -->
+<script src="src/views/panorama.js"></script>
+<script src="src/views/tresd.js"></script>
+<script src="src/views/poblacion.js"></script>
+<script src="src/views/academico.js"></script>
+<script src="src/views/analisis.js"></script>
+<script src="src/views/datos.js"></script>
+<!-- 6. Arranque -->
+<script src="src/app.js"></script>
+</body>
+</html>
