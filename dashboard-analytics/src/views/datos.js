@@ -6,7 +6,7 @@
   const U = App.util, Dt = App.data, ui = App.ui, S = App.S;
 
   /* ---------- Explorador de registros ---------- */
-  const COLS = ['Sede', 'Facultad', 'Programa', 'TipoPrograma', 'Sexo', 'Estrato', 'Modalidad', 'TipoInscripcion', 'Colegio', 'Institucion', 'Comuna', 'Barrio', 'Pais'];
+  const COLS = ['Sede', 'Facultad', 'Programa', 'TipoPrograma', 'Sexo', 'Estrato', 'Modalidad', 'TipoInscripcion', 'Colegio', 'Institucion', 'Comuna', 'Barrio', 'Departamento', 'Pais'];
   const X = { hide: new Set([3, 7, 11, 12]) };
   App.views.explorador = {
     title: 'Explorador de registros', group: 'Datos', icon: 'search',

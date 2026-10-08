@@ -15,7 +15,7 @@
   const hist = []; // conversación para Gemini
   let busy = false;
 
-  const TOPW = [[/programas?/, 'Programa'], [/sedes?/, 'Sede'], [/facultad(es)?/, 'Facultad'], [/comunas?/, 'Comuna'], [/barrios?/, 'Barrio'],
+  const TOPW = [[/programas?/, 'Programa'], [/sedes?/, 'Sede'], [/facultad(es)?/, 'Facultad'], [/comunas?/, 'Comuna'], [/departamentos?/, 'Departamento'], [/barrios?/, 'Barrio'],
     [/(colegios?|instituci(o|ó)n(es)?)( de procedencia)?/, 'Institucion'], [/pa(i|í)s(es)?/, 'Pais'], [/ciudad(es)?/, 'Ciudad'], [/estratos?/, 'Estrato'],
     [/modalidad(es)?/, 'Modalidad'], [/(a|á)reas?/, 'Area'], [/inscripci(o|ó)n/, 'TipoInscripcion'], [/(sexo|g(e|é)nero)/, 'Sexo']];
 
@@ -25,7 +25,7 @@
     const base = S.idx, n0 = base.length;
     if (!n0) return { html: 'Con los filtros actuales no hay estudiantes. Quita algún filtro y vuelve a preguntar.' };
     if (/^(hola|buenas|hey|holi)\b/.test(q)) return { html: `¡Hola! Estoy mirando <b>${U.fmt(n0)}</b> estudiantes con los filtros actuales. Pregúntame por programas, sedes, estratos, comunas, colegios o combinaciones como <i>"¿qué programa tiene más mujeres en modalidad virtual?"</i>.` };
-    if (/mapa/.test(q)) return { html: 'El mapa muestra dónde viven y dónde estudian los estudiantes.', btn: [['Abrir mapa', () => App.go('mapa')]] };
+    if (/mapa/.test(q)) return { html: 'El mapa de Colombia muestra de qué departamento vienen los estudiantes; al tocar un departamento se filtra todo el tablero.', btn: [['Abrir mapa', () => App.go('mapa')]] };
     if (/\b3d\b|ciudad de datos|tres d/.test(q)) return { html: 'En la ciudad 3D cada torre es un cruce de dos dimensiones y su altura es el número de estudiantes.', btn: [['Abrir vista 3D', () => App.go('tresd')]] };
     if (/compar/.test(q)) return { html: 'Para comparar dos grupos lado a lado usa el comparador: eliges el segmento A y el B y ves sus diferencias en puntos porcentuales.', btn: [['Abrir comparador', () => App.go('comparador')]] };
 
@@ -127,7 +127,7 @@
   }
   const mode = () => { U.$('#aiMode').textContent = U.store.get(KEY, '') ? 'Gemini + motor local' : 'Motor local · sin conexión a IA externa'; };
   function sugg() {
-    const v = S.view, extra = { mapa: '¿Qué comunas aportan más estudiantes?', tresd: '¿Qué facultad tiene más estudiantes de estrato 1?', comparador: '¿En qué se diferencian hombres y mujeres?', sedes: '¿Qué sede tiene más estudiantes virtuales?' }[v];
+    const v = S.view, extra = { mapa: '¿Qué departamentos aportan más estudiantes?', tresd: '¿Qué facultad tiene más estudiantes de estrato 1?', comparador: '¿En qué se diferencian hombres y mujeres?', sedes: '¿Qué sede tiene más estudiantes virtuales?' }[v];
     const s = ['Hazme un resumen', extra || '¿Qué programa tiene más mujeres?', '¿Cuántos estudiantes de estrato 1 vienen de colegio público?', '¿Qué sede tiene más estudiantes?'];
     U.$('#aiSug').innerHTML = s.map(x => `<button type="button">${x}</button>`).join('');
   }

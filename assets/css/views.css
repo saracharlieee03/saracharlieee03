@@ -123,10 +123,42 @@ td.tot { font-weight: 600; background: var(--surface-2); }
 .qa p { padding: 0 0 14px 30px; color: var(--muted); }
 .qa .icon-btn { position: absolute; right: 8px; top: 7px; width: 30px; height: 30px; }
 
-/* ---------- Mapa ---------- */
-.map { height: 520px; border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); background: var(--surface-2); z-index: 0; }
-.leaflet-container { font-family: var(--font-ui); }
-.leaflet-tooltip { border-radius: 8px; border: 0; box-shadow: 0 6px 20px -6px rgba(0, 0, 0, .4); }
+/* ---------- Mapa de Colombia (coroplético SVG) ---------- */
+/* Escala secuencial de un tono: se mezcla el azul de marca con la superficie,
+   así en tema oscuro "más estudiantes" sigue siendo "más intenso". */
+.geo { position: relative; --q1: color-mix(in srgb, var(--brand) 14%, var(--surface)); --q2: color-mix(in srgb, var(--brand) 30%, var(--surface));
+  --q3: color-mix(in srgb, var(--brand) 50%, var(--surface)); --q4: color-mix(in srgb, var(--brand) 74%, var(--surface)); --q5: var(--brand); }
+.geo > svg { display: block; width: 100%; height: auto; max-height: min(74vh, 760px); margin: 0 auto; }
+.geo .dep { fill: var(--surface-2); stroke: var(--surface); stroke-width: 1.4; vector-effect: non-scaling-stroke; transition: fill .25s, opacity .2s; }
+.geo .dep[data-q="0"] { stroke: var(--line); }
+.geo .dep[data-q="1"], .geo-legend i[data-q="1"] { fill: var(--q1); background: var(--q1); }
+.geo .dep[data-q="2"], .geo-legend i[data-q="2"] { fill: var(--q2); background: var(--q2); }
+.geo .dep[data-q="3"], .geo-legend i[data-q="3"] { fill: var(--q3); background: var(--q3); }
+.geo .dep[data-q="4"], .geo-legend i[data-q="4"] { fill: var(--q4); background: var(--q4); }
+.geo .dep[data-q="5"], .geo-legend i[data-q="5"] { fill: var(--q5); background: var(--q5); }
+.geo .dep[data-i] { cursor: pointer; }
+.geo .dep[data-i]:hover, .geo .dep.hl { stroke: var(--ink); stroke-width: 2; }
+.geo .dep:focus { outline: none; }
+.geo .dep:focus-visible { stroke: var(--accent); stroke-width: 3.5; }
+.geo.has-sel .dep:not(.on) { opacity: .5; }
+.geo .dep.on { stroke: var(--ink); stroke-width: 2.8; }
+.geo-lbl { font: 600 30px var(--font-ui); fill: var(--ink); text-anchor: middle; paint-order: stroke; stroke: var(--surface); stroke-width: 7px; stroke-linejoin: round; pointer-events: none; }
+.geo-lbl .v { font-weight: 700; font-size: 26px; fill: var(--muted); }
+.geo-inset rect { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 5; }
+.geo-inset text { font: 600 18px var(--font-ui); fill: var(--muted); }
+.geo-legend { position: absolute; left: 0; bottom: 4px; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-md); background: color-mix(in srgb, var(--surface) 90%, transparent); font-size: 11.5px; color: var(--muted); }
+.geo-legend p { font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.geo-legend ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.geo-legend li { display: flex; align-items: center; gap: 8px; font-variant-numeric: tabular-nums; }
+.geo-legend i { width: 22px; height: 12px; border-radius: 3px; background: var(--surface-2); border: 1px solid var(--line); }
+.geo-sel { position: absolute; right: 0; top: 0; display: grid; gap: 2px; justify-items: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); box-shadow: var(--shadow); font-size: 12px; color: var(--muted); }
+.geo-sel b { font: 700 17px var(--font-display); color: var(--ink); }
+.geo-sel .btn { margin-top: 6px; }
+.geo .d3-tip { z-index: 2; }
+.rank.scroll { max-height: 700px; overflow-y: auto; padding-right: 4px; }
+.rank button.on { background: var(--brand-soft); font-weight: 600; }
+.rank button.hl { background: var(--surface-2); }
+.rank button.out span { color: var(--muted); font-style: italic; }
 .rank { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .rank button { position: relative; width: 100%; display: flex; justify-content: space-between; gap: 10px; border: 0; background: none; padding: 8px 10px; border-radius: 8px; cursor: pointer; text-align: left; font-size: 13px; overflow: hidden; }
 .rank button:hover:not(:disabled) { background: var(--surface-2); }
@@ -185,7 +217,8 @@ td.tot { font-weight: 600; background: var(--surface-2); }
   .waffle .w { width: 14px; height: 14px; border-radius: 4px; }
   .wlegend { width: 100%; }
   .d3 { height: 420px; }
-  .map { height: 380px; }
+  .geo-legend, .geo-sel { position: static; margin-top: 10px; }
+  .geo-legend ol { grid-template-columns: repeat(3, auto); }
   .treemap { height: 520px; }
   .cmp-row { grid-template-columns: 1fr 1fr; }
   .cmp-l { grid-column: 1 / -1; }
